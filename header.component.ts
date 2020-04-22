@@ -14,8 +14,8 @@ interface chartDataType{
 
 export class HeaderComponent implements OnChanges {
 
-  @Input() data: chartDataType[] ;
-  @Input() keys:string[];
+	@Input() data: chartDataType[] ;
+	@Input() keys:string[];
 
 	private w: number = 750;
 	private h: number = 400;
@@ -33,41 +33,39 @@ export class HeaderComponent implements OnChanges {
 	private layersBar: any;
 	private xAxis: any;
 	private yAxis: any;
-  private stackedSeries: any;
-  private chartColorConstants={
-    'baseColor': '#ededed',
-    'profitColor': '#429e34',
-    'lossColor': '#f45e5d'
-  }
+	private stackedSeries: any;
+	private chartColorConstants={
+	'baseColor': '#ededed',
+	'profitColor': '#429e34',
+	'lossColor': '#f45e5d'
+	}
 
 	constructor(private container: ElementRef, private graphService:GraphDataService){
 
 	}
 
 	ngOnInit() {
-		this.stack = d3.stack()
-      .keys(this.keys);
+		this.stack = d3.stack().keys(this.keys);
 
 		this.initScales();
 		this.initSvg();
 		this.createStack(this.data);
 		this.drawAxis();
-  }
+  	}
   
 /* to detect the tab or button change, so that graph can be changed as per the desired data */
 	ngOnChanges(changes: SimpleChanges) {
 		const dataChange = changes.data;
 		if(dataChange && dataChange.firstChange === false){
-			this.stack = d3.stack()
-      .keys(this.keys)
-      this.createStack(this.data);
+			this.stack = d3.stack().keys(this.keys)
+      			this.createStack(this.data);
 		}
 	}
 /* Drawing up the scales */
 	public initScales(){
 		this.x = d3.scaleBand()
-      .rangeRound([0, this.width])
-      .round(true)
+      			.rangeRound([0, this.width])
+      			.round(true)
 			.padding(0.6);
 
 		this.y = d3.scaleLinear()
@@ -98,14 +96,14 @@ export class HeaderComponent implements OnChanges {
 		this.xAxis = this.chart.append('g')
 			.classed('x-axis', true)
 			.attr("transform", "translate(0," + this.height + ")")
-      .call(d3.axisBottom(this.x).tickSize(0))
+      			.call(d3.axisBottom(this.x).tickSize(0))
       
-    this.xAxis.selectAll("path")
-    .attr("stroke", "#d9d9d9");
-    this.xAxis.selectAll("text")
-    .style("stroke","#4d4d4d")
-    .style("font-size","14px")
-    .attr('y', '10');
+	    this.xAxis.selectAll("path")
+	    .attr("stroke", "#d9d9d9");
+	    this.xAxis.selectAll("text")
+	    .style("stroke","#4d4d4d")
+	    .style("font-size","14px")
+	    .attr('y', '10');
 		
   
    /* Since Y-axis is not required in our case, therefore it has been skipped */
@@ -120,9 +118,9 @@ export class HeaderComponent implements OnChanges {
 	}
 /* Contains logic for drawing the graph */
 	public drawChart(data:any){
-    if(this.layersBar){ //removing the earlier bar charts (if any)
-      this.layersBar.remove();
-    }
+	    if(this.layersBar){ //removing the earlier bar charts (if any)
+	      this.layersBar.remove();
+	    }
 
 		this.layersBar = this.layersBarArea.selectAll('.layer')
 			.data(data)
