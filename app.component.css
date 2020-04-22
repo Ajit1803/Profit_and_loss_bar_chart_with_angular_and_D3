@@ -1,0 +1,6 @@
+.specialNames{
+    background:blue
+}
+::ng-deep #chart {
+    height: 440px;
+}
