@@ -1,5 +1,4 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
-import { HeaderComponent } from './header/header.component';
+import { Component, OnInit } from '@angular/core';
 import * as d3 from 'd3';
 import { GraphDataService } from './graph-data.service';
 
@@ -12,10 +11,8 @@ export class AppComponent implements OnInit {
   Data:any;
   keys:any;
 
-  @ViewChild(HeaderComponent) private graphModule : HeaderComponent;
-
   constructor(private graphService:GraphDataService) {}
-  
+
   ngOnInit() {
     this.Data = this.graphService.getChartData(1);
     this.keys=[Object.keys(this.Data[0])[0], Object.keys(this.Data[0])[1]]
